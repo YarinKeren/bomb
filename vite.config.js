@@ -10,6 +10,12 @@ export default defineConfig({
         name: "Bomb shelter finder",
         short_name: "bomb shelter finder",
         description: "Find the nearest bomb shelter",
+        theme_color: "#171717",
+        background_color: "#f0e7db",
+        display: "standalone",
+        scope: "/",
+        start_url: "/",
+        orientation: "portrait",
         icons: [
           {
             src: "/icons/maskable-icon.png",
