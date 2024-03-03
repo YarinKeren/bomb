@@ -70,7 +70,7 @@ export function BombShelterFinder() {
           <Marker
             position={coordinates}
             icon={{
-              url: "/man.png", // Custom icon for the user's location
+              url: "./man.png", // Custom icon for the user's location
               scaledSize: new google.maps.Size(40, 40), // Scale the custom icon
             }}
           />
