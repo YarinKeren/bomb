@@ -11,7 +11,7 @@ export function BombShelterFinder() {
 
   // Load the Google Maps and Places API
   const { isLoaded } = useJsApiLoader({
-    googleMapsApiKey: "AIzaSyDYzzilbQJYvB7y01g15Cy3Lj9ZvWod_RI", // Replace with your actual Google Maps API key
+    googleMapsApiKey: "AIzaSyDYzzilbQJYvB7y01g15Cy3Lj9ZvWod_RI", // Your Google Maps API key
     libraries: ["places"],
   });
 
