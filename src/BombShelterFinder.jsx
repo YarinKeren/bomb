@@ -18,6 +18,7 @@ export function BombShelterFinder() {
   // Callback function to fetch nearby bomb shelters using the Google Places API
   const fetchShelters = useCallback(
     map => {
+      // init google maps service instance
       const service = new google.maps.places.PlacesService(map);
 
       const request = {
@@ -26,13 +27,17 @@ export function BombShelterFinder() {
         keyword: "מקלט", // Search keyword (Hebrew for "shelter")
       };
 
-      // Perform the nearby search and update the shelters state with the results
+      // Perform the nearby search (builtin google function)
+      // Update the shelters state with the results of the 3 closest places
       service.nearbySearch(request, (results, status) => {
+        // Condition to verify we've connected securely
         if (status === google.maps.places.PlacesServiceStatus.OK && results) {
-          const newShelters = results.map(place => ({
-            lat: place.geometry.location.lat(),
-            lng: place.geometry.location.lng(),
-          }));
+          const newShelters = results
+            .map(place => ({
+              lat: place.geometry.location.lat(),
+              lng: place.geometry.location.lng(),
+            }))
+            .slice(0, 3);
           setShelters(newShelters);
         }
       });
@@ -40,14 +45,15 @@ export function BombShelterFinder() {
     [coordinates] // Re-run the callback when the user's coordinates change
   );
 
-  // Effect hook to get the user's current location on component mount
+  // Effect hook to get the user's current location when the component first loads
   useEffect(() => {
+    // navigator is a builtin object on the browser, we use it to fetch the user's location.
     navigator.geolocation.getCurrentPosition(
       position => {
         const { latitude, longitude } = position.coords;
         setCoordinates({ lat: latitude, lng: longitude }); // Update coordinates state
       },
-      error => console.error(error)
+      error => console.error(error) // Log if there's any error
     );
   }, []);
 
