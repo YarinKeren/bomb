@@ -36,8 +36,7 @@ export function BombShelterFinder() {
             .map(place => ({
               lat: place.geometry.location.lat(),
               lng: place.geometry.location.lng(),
-            }))
-            .slice(0, 3);
+            }));
           setShelters(newShelters);
         }
       });
